@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 2em;
+        }
+        #countdown {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <h1>New Year Countdown</h1>
+    <p>Time left until the new year:</p>
+    <p id="countdown"></p>
+
+    <script>
+        // Function to update the countdown
+        function updateCountdown() {
+            // Get the current date and time
+            var now = new Date();
+
+            // Set the target date for the new year
+            var newYear = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0);
+
+            // Calculate the time difference
+            var timeLeft = newYear - now;
+
+            // Convert the time difference to days, hours, minutes, and seconds
+            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Display the countdown
+            document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+
+            // Update the countdown every second
+            setTimeout(updateCountdown, 1000);
+        }
+
+        // Initial call to start the countdown
+        updateCountdown();
+    </script>
+</body>
+</html>
