@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            position: relative;
+            color: white;
+            background-image: url('https://images.pexels.com/photos/1519088/pexels-photo-1519088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+            z-index: -1;
+        }
+        h1 {
+            font-size: 2em;
+            z-index: 1;
+        }
+        #countdown {
+            font-size: 1.5em;
+            z-index: 1;
+        }
+        #happyNewYear {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3em;
+            color: gold;
+            display: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>New Year Countdown</h1>
+    <p>Time left until the new year:</p>
+    <p id="countdown"></p>
+    <p id="happyNewYear">Happy New Year!</p>
+
+    <script>
+        // Function to update the countdown
+        function updateCountdown() {
+            // Get the current date and time
+            var now = new Date();
+
+            // Set the target date for the new year
+            var newYear = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0);
+
+            // Calculate the time difference
+            var timeLeft = newYear - now;
+
+            // Convert the time difference to days, hours, minutes, and seconds
+            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Display the countdown
+            document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+
+            // Check if the countdown has reached zero
+            if (timeLeft <= 0) {
+                // Display "Happy New Year!" and hide the countdown
+                document.getElementById('countdown').style.display = 'none';
+                document.getElementById('happyNewYear').style.display = 'block';
+            } else {
+                // Update the countdown every second
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+
+        // Initial call to start the countdown
+        updateCountdown();
+    </script>
+</body>
+</html>
