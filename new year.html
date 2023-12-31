@@ -9,6 +9,11 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
+            margin: 0;
+            background-image: url('https://www.pexels.com/photo/buildings-near-body-of-water-at-night-1519088/');
+            background-size: cover;
+            background-position: center;
+            color: white;
         }
         h1 {
             font-size: 2em;
@@ -16,12 +21,19 @@
         #countdown {
             font-size: 1.5em;
         }
+        #happyNewYear {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3em;
+            color: gold;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h1>New Year Countdown</h1>
     <p>Time left until the new year:</p>
     <p id="countdown"></p>
+    <p id="happyNewYear">Happy New Year!</p>
 
     <script>
         // Function to update the countdown
@@ -44,8 +56,15 @@
             // Display the countdown
             document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
 
-            // Update the countdown every second
-            setTimeout(updateCountdown, 1000);
+            // Check if the countdown has reached zero
+            if (timeLeft <= 0) {
+                // Display "Happy New Year!" and hide the countdown
+                document.getElementById('countdown').style.display = 'none';
+                document.getElementById('happyNewYear').style.display = 'block';
+            } else {
+                // Update the countdown every second
+                setTimeout(updateCountdown, 1000);
+            }
         }
 
         // Initial call to start the countdown
